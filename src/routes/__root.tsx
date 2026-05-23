@@ -9,11 +9,15 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import "@fontsource/inter/300.css";
 import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/300.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
+import { AuthProvider } from "@/lib/auth-context";
+import { ModalProvider } from "@/lib/modal-context";
 
 function NotFoundComponent() {
   return (
@@ -120,7 +124,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <AuthProvider>
+        <ModalProvider>
+          <Outlet />
+        </ModalProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
